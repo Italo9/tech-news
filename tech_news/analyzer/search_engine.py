@@ -42,4 +42,11 @@ def search_by_tag(tag):
 
 # Requisito 9
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    caracter_min = category.lower()
+    result_database_busca_category = search_news(
+        {"category": {"$regex": caracter_min, "$options": "i"}}
+    )
+    result_lista = list()
+    for new in result_database_busca_category:
+        result_lista.append((new["title"], new["url"]))
+    return result_lista
