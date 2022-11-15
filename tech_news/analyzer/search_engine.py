@@ -30,7 +30,14 @@ def search_by_date(date):
 
 # Requisito 8
 def search_by_tag(tag):
-    """Seu código deve vir aqui"""
+    caracter_min = tag.lower()
+    result_database_busca_tag = search_news(
+        {"tags": {"$elemMatch": {"$regex": caracter_min, "$options": "i"}}}
+    )
+    result_lista = list()
+    for new in result_database_busca_tag:
+        result_lista.append((new["title"], new["url"]))
+    return result_lista
 
 
 # Requisito 9
